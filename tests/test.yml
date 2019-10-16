@@ -1,0 +1,12 @@
+---
+- hosts: localhost
+  remote_user: root
+  vars:
+    iptables:
+      disable_firewall: yes
+      enable_ping: yes
+      ports:
+        - "22"
+        - "80"
+  roles:
+    - iptables

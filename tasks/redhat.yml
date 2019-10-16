@@ -1,0 +1,14 @@
+---
+  - name: Disable RHEL/CentOS firewall
+    service:
+      name: firewalld.service
+      enabled: no
+      state: stopped
+    when: iptables.disable_firewall == 1
+    #when: iptables.enable_ping == 1
+
+  - name: install RHEL/CentOS packages
+    package:
+      pkg: "{{ rh_packages }}"
+      update_cache: yes
+    tags: iptables

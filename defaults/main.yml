@@ -1,0 +1,14 @@
+---
+# defaults file for iptables
+  iptables:
+    disable_firewall: yes
+    enable_ping: yes
+    ports:
+      - 22
+      - 80
+
+  deb_packages:
+    - iptables-persistent
+
+  rh_packages:
+    - iptables-services

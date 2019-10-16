@@ -1,0 +1,75 @@
+---
+# tasks file for iptables
+  - name: include Debian tasks
+    include: debian.yml
+    when: (ansible_os_family == "Debian")
+    tags: iptables
+
+  - name: include RedHat tasks
+    include: redhat.yml
+    when: (ansible_os_family == "RedHat")
+    tags: iptables
+
+  - name: iptables INPUT ACCEPT
+    iptables:
+      chain: INPUT
+      policy: ACCEPT
+
+  - name: iptables established connections
+    iptables:
+      chain: INPUT
+      ctstate: ESTABLISHED,RELATED
+      jump: ACCEPT
+    notify: save iptables
+    tags: iptables
+
+  - name: iptables localhost
+    iptables:
+      chain: INPUT
+      source: localhost
+      jump: ACCEPT
+    notify: save iptables
+    tags: iptables
+
+  - name: iptables enable port {{ item }}
+    iptables:
+      chain: INPUT
+      protocol: tcp
+      destination_port: "{{ item }}"
+      jump: ACCEPT
+    with_items:
+      "{{ iptables.ports }}"
+    notify: save iptables
+    tags: iptables
+
+  - name: iptables INPUT DROP
+    iptables:
+      chain: INPUT
+      policy: DROP
+    notify: save iptables
+    tags: iptables
+
+  - name: iptables allow ping
+    iptables:
+      chain: INPUT
+      protocol: icmp
+      icmp_type: echo-request
+      jump: ACCEPT
+    notify: save iptables
+    when: iptables.enable_ping == 1
+    tags: iptables
+
+  - name: iptables allow ping reply
+    iptables:
+      chain: OUTPUT
+      protocol: icmp
+      icmp_type: echo-reply
+      jump: ACCEPT
+    notify: save iptables
+    when: iptables.enable_ping == 1
+    tags: iptables
+
+  - name: iptables INPUT DROP
+    iptables:
+      chain: INPUT
+      policy: DROP
