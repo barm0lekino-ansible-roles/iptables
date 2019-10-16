@@ -1,6 +1,8 @@
 galaxy_info:
-  author: Barm0leykin
-  description: config iptables
+  author: Andrey Kudryashov (Barm0leykin)
+  description: Visual web log analizer for nginx goaccess
+  role_name: iptables
+  company: ""
 
   # If the issue tracker for your role is not on github, uncomment the
   # next line and provide a value
@@ -38,7 +40,7 @@ galaxy_info:
   #   - 7
   #   - 99.99
    platforms:
-   - name: ubuntu
+   - name: Ubuntu
      versions:
      - all
    platforms:
