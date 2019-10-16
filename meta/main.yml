@@ -39,11 +39,11 @@ galaxy_info:
   #   - 1.0
   #   - 7
   #   - 99.99
-   platforms:
+  platforms:
     - name: Ubuntu
       versions:
       - all
-   platforms:
+  platforms:
     - name: CentOs
       versions:
       - all
