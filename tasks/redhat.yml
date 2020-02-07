@@ -1,10 +1,18 @@
 ---
+  - name: Check if Service Exists
+    stat:
+      path: /etc/init.d/firewalld.service
+    register: firewall_status
+
+  #- debug: firewall_status
+
   - name: Disable RHEL/CentOS firewall
     service:
       name: firewalld.service
       enabled: no
       state: stopped
-    when: iptables.disable_firewall == 1
+    when: (iptables.disable_firewall == 1) and
+          (firewall_status.stat.exists == 1)
     #when: iptables.enable_ping == 1
 
   - name: install RHEL/CentOS packages
