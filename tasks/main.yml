@@ -1,5 +1,10 @@
 ---
 # tasks file for iptables
+  - name: Gathering OS Family facts
+    setup: filter='ansible_os_family'
+    #setup: filter='*'
+    tags: iptables
+
   - name: include Debian tasks
     include: debian.yml
     when: (ansible_os_family == "Debian")

@@ -1,6 +1,6 @@
 galaxy_info:
   author: Andrey Kudryashov (Barm0leykin)
-  description: Visual web log analizer for nginx goaccess
+  description: iptables
   role_name: iptables
   company: ""
 
@@ -43,7 +43,6 @@ galaxy_info:
     - name: Ubuntu
       versions:
       - all
-  platforms:
     - name: CentOs
       versions:
       - all
